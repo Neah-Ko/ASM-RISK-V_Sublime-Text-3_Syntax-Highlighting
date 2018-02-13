@@ -21,5 +21,6 @@ Green : Registers
 Blue : Functions
 Orange : Branches / Jumps
 White : I/O, brackets (and parameters that I didn't managed to highlight)
+Grey : Comments
 ```
 Here a small example of a factorial function :
