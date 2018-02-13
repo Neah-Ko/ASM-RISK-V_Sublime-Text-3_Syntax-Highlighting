@@ -3,8 +3,7 @@ This is a small syntax highlighting package for the assembly language RISK-V tha
 It has been made on and for Sublime Text 3, I don't know how compatibilities works.
 
 ## Dependencies
-This has been developped through the norm introduded with Build 3084 and hence needs :
-`https://github.com/SublimeText/PackageDev`
+This has been developped through the norm introduded with Build 3084 and hence needs : [PackageDev](https://github.com/SublimeText/PackageDev)
 
 ## Installation
 Place the file RISK-V_Assembly.sublime-syntax file in the folder
