@@ -1,0 +1,80 @@
+%YAML 1.2
+---
+# See http://www.sublimetext.com/docs/3/syntax.html
+file_extensions:
+  - asm
+scope: source.asm
+
+contexts:
+  # The prototype context is prepended to all contexts but those setting
+  # meta_include_prototype: false.
+  prototype:
+    - include: comments
+
+  main:
+    # The main context is the initial starting point of our syntax.
+    # Include other contexts from here (or specify them directly).
+    - include: labels
+    - include: numbers
+    - include: strings
+    - include: functions
+    - include: jumps   
+    - include: registers
+    - include: io
+
+# scope source https://www.sublimetext.com/docs/3/scope_naming.html#entity
+  labels:
+    # Keywords are if, else for and while.
+    # Note that blackslashes don't need to be escaped within single quoted
+    # strings in YAML. When using single quoted strings, only single quotes
+    # need to be escaped: this is done by using two single quotes next to each
+    # other.
+    - match: '^\s*[a-zA-Z]{1}[a-zA-Z0-9]+\:'
+      scope: keyword.control.example-c
+      #push:
+       # - match: 
+  io:
+    - match: 'ecall\s{1}'
+      scope: entity.name.label markup.italic
+
+  registers:
+    - match: '(x[0-9]{1,2}|ra|gp|t[p0-6]{1}|s[p,0,1,2,3,4,5,6,7,8,9,10,11]{1}|a[0-7]{1}|)'
+      scope: entity.name.function
+
+  numbers:
+    - match: '\b(-)?[0-9.]+\b'
+      scope: constant.numeric.example-c
+
+  strings:
+    # Strings begin and end with quotes, and use backslashes as an escape
+    # character.
+    - match: '"'
+      scope: punctuation.definition.string.begin.example-c
+      push: inside_string
+
+  inside_string:
+    - meta_include_prototype: false
+    - meta_scope: string.quoted.double.example-c
+    - match: '\.'
+      scope: constant.character.escape.example-c
+    - match: '"'
+      scope: punctuation.definition.string.end.example-c
+      pop: true
+
+  functions:
+      - match: '\b(addi|add|sd|sb|sw|ld|lw|lb|mul|sll)\s{1}\b'
+        scope: variable.function markup.italic.
+
+  jumps:
+    - match: '\b(jal|jalr|beq|bne)\s{1}\b'
+      scope: variable.language
+
+  comments:
+    # Comments begin with a '//' and finish at the end of the line.
+    - match: '//|;'
+      scope: punctuation.definition.comment.example-c
+      push:
+        # This is an anonymous context push for brevity.
+        - meta_scope: comment.line.double-slash.example-c
+        - match: $\n?
+          pop: true
