@@ -24,3 +24,4 @@ White : I/O, brackets (and parameters that I didn't managed to highlight)
 Grey : Comments
 ```
 Here a small example of a factorial function :
+![alt text](https://github.com/Neah-Ko/ASM-RISK-V_Sublime-Text-3_Syntax-Highlighting/blob/master/RISK-V_ex.jpg "RISK-V ASM Factorial")
